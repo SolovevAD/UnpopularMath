@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Интерактивная образовательная платформа кафедры вычислительной математики.">
+    <title>Мир Чисел | Образовательная платформа</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Мир Чисел</h1>
+        <nav>
+            <ul>
+                <li><span class="nav-link font-bold" onclick="switchPage('home')">Главная</span></li>
+                <li><span class="nav-link font-bold" onclick="switchPage('about')">О проекте</span></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">Сменить тему</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <wrapper>
+        <aside id="sidebar"><!-- заполняется динамически --></aside>
+
+        <main>
+            <!-- ГЛАВНАЯ: список модулей -->
+            <section id="page-home" class="page active">
+                <h2>Учебные модули</h2>
+                <p class="welcome-text">
+                    Интерактивная платформа для изучения дискретной математики и информатики.
+                    Каждый модуль — самостоятельный курс с теорией, задачами, калькуляторами и тренажёрами.
+                </p>
+                <div id="modules-grid"></div>
+            </section>
+
+            <!-- О ПРОЕКТЕ -->
+            <section id="page-about" class="page">
+                <h2>О платформе</h2>
+                <p>«Мир Чисел» — учебный проект кафедры вычислительной математики. Платформа развивается как набор независимых модулей, каждый из которых посвящён отдельной теме дискретной математики и теоретической информатики.</p>
+
+                <h3>Что уже доступно</h3>
+                <ul>
+                    <li><strong>Полный курс систем счисления</strong> — 17 занятий с теорией, практикой и инструментами.</li>
+                </ul>
+
+                <h3>Что появится в будущем</h3>
+                <ul>
+                    <li>Конечные автоматы и регулярные языки.</li>
+                    <li>Теория графов и алгоритмы на графах.</li>
+                    <li>Алгебра логики и минимизация булевых функций.</li>
+                    <li>Комбинаторика и дискретная вероятность.</li>
+                    <li>Теория кодирования и помехоустойчивые коды.</li>
+                </ul>
+
+                <h3>Технологии</h3>
+                <p>Платформа построена на чистом HTML, CSS и JavaScript без внешних зависимостей. Все модули рендерятся из структурированных данных, что позволяет добавлять новый контент, не трогая вёрстку.</p>
+
+                <h3>Обратная связь</h3>
+                <p>Замечания и предложения присылайте на кафедру вычислительной математики.</p>
+            </section>
+
+            <!-- ИНСТРУМЕНТЫ КУРСА СИСТЕМ СЧИСЛЕНИЯ (статичная страница) -->
+            <section id="page-tools-numeral-systems" class="page">
+                <h2>Инструменты курса</h2>
+                <p><button class="btn btn-secondary" onclick="switchPage('module-numeral-systems')">← К курсу систем счисления</button></p>
+
+                <section class="calculator-box">
+                    <h3>Быстрый перевод в 2 / 8 / 16</h3>
+                    <p>Введите целое положительное десятичное число:</p>
+                    <p>
+                        <label for="dec-input">Десятичное число:</label>
+                        <input type="number" id="dec-input" placeholder="Например: 255" min="0" oninput="calculateSystems()">
+                    </p>
+                    <table class="calc-results-table">
+                        <thead>
+                            <tr><th>Система счисления</th><th>Результат</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Двоичная (2)</strong></td><td><code id="res-bin">0</code></td></tr>
+                            <tr><td><strong>Восьмеричная (8)</strong></td><td><code id="res-oct">0</code></td></tr>
+                            <tr><td><strong>Шестнадцатеричная (16)</strong></td><td><code id="res-hex">0</code></td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <hr>
+
+                <section class="calculator-box">
+                    <h3>Универсальный переводчик (2–36, дроби, шаги)</h3>
+                    <div class="calc-controls">
+                        <label>Число
+                            <input type="text" id="calc-number" value="255" autocomplete="off">
+                        </label>
+                        <label>Из основания
+                            <input type="number" id="calc-from" value="10" min="2" max="36">
+                        </label>
+                        <label>В основание
+                            <input type="number" id="calc-to" value="2" min="2" max="36">
+                        </label>
+                    </div>
+                    <p class="calc-result">Результат: <code id="calc-result">—</code></p>
+                    <p class="calc-error" id="calc-error"></p>
+                    <details>
+                        <summary>Показать пошаговое решение</summary>
+                        <div id="calc-steps" class="code-text"></div>
+                    </details>
+                </section>
+
+                <hr>
+
+                <section class="quiz-box">
+                    <h3>Тренажёр перевода чисел</h3>
+                    <p>Задачи генерируются случайно. Вводите ответ, затем нажмите «Проверить» или Enter.</p>
+                    <p>Счёт: <strong id="trainer-score">0</strong> правильно / <span id="trainer-total">0</span> попыток</p>
+                    <p class="trainer-task" id="trainer-task">Загрузка задания…</p>
+                    <p>
+                        <input type="text" id="trainer-input" placeholder="Введите ответ" autocomplete="off">
+                        <button class="btn" onclick="checkTrainer()">Проверить</button>
+                        <button class="btn btn-secondary" onclick="newTrainerTask()">Пропустить</button>
+                    </p>
+                    <p class="quiz-status" id="trainer-feedback"></p>
+                </section>
+
+                <hr>
+
+                <section>
+                    <h3>Римский справочник весов</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Символ</th><th>Название</th><th>Значение</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>I</td><td>Unus</td><td>1</td></tr>
+                            <tr><td>V</td><td>Quinque</td><td>5</td></tr>
+                            <tr><td>X</td><td>Decem</td><td>10</td></tr>
+                            <tr><td>C</td><td>Centum</td><td>100</td></tr>
+                            <tr><td>M</td><td>Mille</td><td>1000</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+
+            <!-- Контейнеры для динамики -->
+            <div id="modules-container"></div>
+            <div id="lessons-container"></div>
+        </main>
+    </wrapper>
+
+    <button id="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Наверх">↑</button>
+
+    <footer>
+        <section class="footer-layout">
+            <article class="project-info">
+                <strong>О проекте:</strong>
+                <p>Образовательная платформа кафедры вычислительной математики. Модульная система позволяет изучать дискретную математику последовательно, с интерактивными инструментами и проверкой знаний.</p>
+            </article>
+            <p class="copyright">&copy; 2026 Мир Чисел. Все права защищены.</p>
+        </section>
+    </footer>
+
+    <script src="course.js"></script>
+    <script src="modules.js"></script>
+    <script src="renderer.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
