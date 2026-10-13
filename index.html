@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Интерактивная образовательная платформа кафедры вычислительной математики.">
-    <meta name="color-scheme" content="light dark">
-    <title>Мир Чисел | Образовательная платформа</title>
+    <meta name="description" content="Учебная платформа кафедры Общей и экспериментальной физики МПГУ. Интерактивные модули по дискретной математике.">
+    <!-- Open Graph — для Telegram, VK, WhatsApp, Facebook -->
+    <meta property="og:title" content="Мир Чисел — платформа учебных модулей">
+    <meta property="og:description" content="Интерактивные модули по системам счисления, автоматам, графам и алгебре логики.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solovevad.github.io/UnpopularMath/">
+    <meta property="og:image" content="https://solovevad.github.io/UnpopularMath/preview.png">
+    <!-- Twitter Card (для некоторых клиентов) -->
+    <meta name="twitter:card" content="summary_large_image">
+>>>>>>> 5bf714bbb9d8cf8e8acd7757aeee224fdf29fd6c
+    <title>Разнообразная математика | Образовательная платформа</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <h1>Мир Чисел</h1>
         <nav>
@@ -22,10 +30,10 @@
     </header>
 
     <wrapper>
-        <aside id="sidebar"></aside>
+        <aside id="sidebar"><!-- заполняется динамически --></aside>
 
         <main>
-            <!-- ГЛАВНАЯ -->
+            <!-- ГЛАВНАЯ: список модулей -->
             <section id="page-home" class="page active">
                 <h2>Учебные модули</h2>
                 <p class="welcome-text">
@@ -62,7 +70,7 @@
                 <p>Замечания и предложения присылайте на кафедру вычислительной математики.</p>
             </section>
 
-            <!-- ИНСТРУМЕНТЫ КУРСА СИСТЕМ СЧИСЛЕНИЯ -->
+            <!-- ИНСТРУМЕНТЫ КУРСА СИСТЕМ СЧИСЛЕНИЯ (статичная страница) -->
             <section id="page-tools-numeral-systems" class="page">
                 <h2>Инструменты курса</h2>
                 <p><button class="btn btn-secondary" onclick="switchPage('module-numeral-systems')">← К курсу систем счисления</button></p>
@@ -148,14 +156,12 @@
             <div id="lessons-container"></div>
         </main>
     </wrapper>
-
     <button id="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Наверх">↑</button>
-
     <footer>
         <section class="footer-layout">
             <article class="project-info">
                 <strong>О проекте:</strong>
-                <p>Образовательная платформа кафедры вычислительной математики. Модульная система позволяет изучать дискретную математику последовательно, с интерактивными инструментами и проверкой знаний.</p>
+                <p>Образовательная платформа в рамках кафедры Общей и экспериментальной физики МПГУ. Модульная система позволяет изучать дискретную математику последовательно, с интерактивными инструментами и проверкой знаний.</p>
             </article>
             <p class="copyright">&copy; 2026 Мир Чисел. Все права защищены.</p>
         </section>
