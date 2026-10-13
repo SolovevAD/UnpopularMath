@@ -125,7 +125,6 @@ function showPage(pageId) {
     window.scrollTo(0, 0);
 
     if (pageId === 'tools-numeral-systems') ensureTrainerReady();
-    if (pageId === 'tools-quantum-computer') ensureGateTrainerReady();
 }
 
 function findModuleByLesson(lessonId) {
@@ -203,11 +202,6 @@ function resetProgress() {
     trainerTotal = 0;
     trainerReady = false;
     updateTrainerScore();
-    gateScore = 0;
-    gateTotal = 0;
-    gateReady = false;
-    updateGateScore();
-    localStorage.removeItem('gate_stats');
 }
 
 /* ============================================================

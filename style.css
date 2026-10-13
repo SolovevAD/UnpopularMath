@@ -603,22 +603,3 @@ aside {
     margin: 8px 0 0;
     color: var(--text-color);
 }
-
-/* ============================================================
-   Тренажёр по квантовым гейтам
-   ============================================================ */
-
-.gate-option {
-    display: inline-block;
-    margin: 4px 6px 4px 0;
-    font-family: monospace;
-    font-size: 15px;
-    padding: 8px 14px;
-}
-.gate-option:hover {
-    background: var(--accent-color);
-    color: #fff;
-}
-#gate-options {
-    margin: 14px 0;
-}
