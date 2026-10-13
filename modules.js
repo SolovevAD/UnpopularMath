@@ -12,13 +12,29 @@ const MODULES = [
         subtitle: '17 занятий: от позиционных систем до IEEE 754',
         description: 'Полный семестровый курс по системам счисления: теория, машинное представление, арифметика, экзотические системы и практические применения.',
         status: 'available',
-        lessons: COURSE,           // ссылка на массив из course.js
-        hasTools: true,            // есть ли у модуля страница инструментов
+        lessons: COURSE,
+        hasTools: true,
         toolsTitle: 'Калькуляторы и тренажёр',
         meta: {
             hours: 34,
             weeks: 17,
             level: 'базовый'
+        }
+    },
+
+    {
+        id: 'quantum-computer',
+        icon: '⚛️',
+        title: 'Квантовый компьютер',
+        subtitle: 'Интенсив: геометрия квантовых вычислений за 8 занятий',
+        description: 'Честная физика и геометрия без квантовой магии: кубиты как стрелки, суперпозиция, интерференция, алгоритм Гровера, алгоритм Шора, декогеренция.',
+        status: 'available',
+        lessons: COURSE_QUANTUM,
+        hasTools: false,
+        meta: {
+            hours: 8,
+            weeks: 2,
+            level: 'средний'
         }
     },
 

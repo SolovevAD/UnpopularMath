@@ -531,3 +531,75 @@ aside {
     #modules-grid { grid-template-columns: 1fr; }
     .lessons-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   SVG-диаграммы в занятиях
+   ============================================================ */
+
+.lesson-figure {
+    margin: 22px 0;
+    padding: 20px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.lesson-figure svg {
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    margin: 0 auto;
+    color: var(--text-color);
+    font-family: sans-serif;
+}
+
+.lesson-figure figcaption {
+    margin-top: 14px;
+    font-size: 0.9em;
+    color: #7f8c8d;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.5;
+    padding: 0 12px;
+}
+
+@media (max-width: 600px) {
+    .lesson-figure { padding: 12px; }
+    .lesson-figure figcaption { font-size: 0.85em; padding: 0; }
+}
+
+/* ============================================================
+   Квизы с несколькими вопросами
+   ============================================================ */
+
+.quiz-question {
+    margin-bottom: 8px;
+}
+.quiz-question p {
+    margin: 6px 0;
+}
+.quiz-divider {
+    border: none;
+    border-top: 1px dashed var(--quiz-border);
+    margin: 18px 0;
+}
+.quiz-hint {
+    margin-top: 10px;
+    background: var(--main-bg);
+    border: 1px solid var(--quiz-border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+.quiz-hint summary {
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+    color: var(--accent-color);
+}
+.quiz-hint p {
+    margin: 8px 0 0;
+    color: var(--text-color);
+}

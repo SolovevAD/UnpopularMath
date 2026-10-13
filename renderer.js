@@ -1,6 +1,11 @@
 /* ============================================================
-   RENDERER.JS — превращает объект занятия в HTML
-   Зависит от: course.js (объект COURSE)
+   RENDERER.JS — превращает данные модулей и занятий в HTML
+   Зависит от: course.js, course-quantum.js, modules.js,
+               quantum-diagrams.js (для SVG-диаграмм)
+   ============================================================ */
+
+/* ============================================================
+   1. БЛОКИ КОНТЕНТА ЗАНЯТИЯ
    ============================================================ */
 
 /** Отрисовка одного блока контента занятия. */
@@ -17,6 +22,16 @@ function renderBlock(sec) {
 
         case 'info':
             return '<p class="info-text">' + sec.text + '</p>';
+
+        case 'image': {
+            const svg = (typeof QUANTUM_DIAGRAMS !== 'undefined' && QUANTUM_DIAGRAMS[sec.src])
+                ? QUANTUM_DIAGRAMS[sec.src]
+                : '<p><em>[изображение недоступно: ' + (sec.src || '') + ']</em></p>';
+            const caption = sec.caption
+                ? '<figcaption>' + sec.caption + '</figcaption>'
+                : '';
+            return '<figure class="lesson-figure">' + svg + caption + '</figure>';
+        }
 
         case 'list':
             return '<ul>' + sec.items.map(function (i) {
@@ -40,29 +55,54 @@ function renderBlock(sec) {
     }
 }
 
-/** Отрисовка квиза занятия. */
+/* ============================================================
+   2. КВИЗ (поддерживает один вопрос или массив вопросов)
+   ============================================================ */
+
 function renderQuiz(lesson) {
     if (!lesson.quiz) return '';
-    const qname = 'quiz_' + lesson.id;
-    const rid   = 'res_' + lesson.id;
 
-    const options = lesson.quiz.options.map(function (opt, i) {
-        const oid = qname + '_' + i;
-        const val = opt.correct ? 'correct' : 'wrong';
-        return '<input type="radio" id="' + oid + '" name="' + qname + '" value="' + val + '"> ' +
-               '<label for="' + oid + '">' + opt.text + '</label><br>';
-    }).join('');
+    const questions = Array.isArray(lesson.quiz) ? lesson.quiz : [lesson.quiz];
+
+    const blocks = questions.map(function (q, qIndex) {
+        const qname = 'quiz_' + lesson.id + '_' + qIndex;
+        const rid   = 'res_' + lesson.id + '_' + qIndex;
+
+        const options = q.options.map(function (opt, i) {
+            const oid = qname + '_' + i;
+            const val = opt.correct ? 'correct' : 'wrong';
+            return '<input type="radio" id="' + oid + '" name="' + qname + '" value="' + val + '"> ' +
+                   '<label for="' + oid + '">' + opt.text + '</label><br>';
+        }).join('');
+
+        const hint = q.hint
+            ? '<details class="quiz-hint"><summary>Показать подсказку</summary><p>' + q.hint + '</p></details>'
+            : '';
+
+        const prefix = questions.length > 1
+            ? '<p><strong>Вопрос ' + (qIndex + 1) + ' из ' + questions.length + ':</strong></p>'
+            : '';
+
+        return '<div class="quiz-question">' +
+               prefix +
+               '<p>' + q.question + '</p>' +
+               '<p>' + options + '</p>' +
+               '<button class="btn" onclick="checkQuiz(\'' + qname + '\', \'' + rid + '\', \'' + lesson.id + '\')">Проверить ответ</button>' +
+               '<p id="' + rid + '" class="quiz-status"></p>' +
+               hint +
+               '</div>';
+    }).join('<hr class="quiz-divider">');
 
     return '<section class="quiz-box">' +
            '<h4>Контрольное задание занятия ' + lesson.num + ':</h4>' +
-           '<p>' + lesson.quiz.question + '</p>' +
-           '<p>' + options + '</p>' +
-           '<button class="btn" onclick="checkQuiz(\'' + qname + '\', \'' + rid + '\', \'' + lesson.id + '\')">Проверить ответ</button>' +
-           '<p id="' + rid + '" class="quiz-status"></p>' +
+           blocks +
            '</section>';
 }
 
-/** Отрисовка домашнего задания. */
+/* ============================================================
+   3. ДОМАШНЕЕ ЗАДАНИЕ
+   ============================================================ */
+
 function renderHomework(lesson) {
     if (!lesson.homework || !lesson.homework.length) return '';
     return '<h3>Домашнее задание</h3>' +
@@ -73,7 +113,10 @@ function renderHomework(lesson) {
            '</ol>';
 }
 
-/** Полная HTML-разметка занятия. */
+/* ============================================================
+   4. ПОЛНАЯ РАЗМЕТКА ЗАНЯТИЯ
+   ============================================================ */
+
 function renderLesson(lesson) {
     const parts = [];
     parts.push('<h2>Занятие ' + lesson.num + '. ' + lesson.title + '</h2>');
@@ -94,7 +137,10 @@ function renderLesson(lesson) {
     return parts.join('\n');
 }
 
-/** Карточка занятия для главной страницы. */
+/* ============================================================
+   5. КАРТОЧКА ЗАНЯТИЯ ДЛЯ ГЛАВНОЙ
+   ============================================================ */
+
 function renderHomeCard(lesson) {
     const shortDesc = lesson.sections.find(function (s) { return s.type === 'p'; });
     const desc = shortDesc ? shortDesc.text : '';
@@ -104,14 +150,12 @@ function renderHomeCard(lesson) {
            '<p>' + desc + '</p>' +
            '<p><button class="btn" onclick="switchPage(\'' + lesson.id + '\')">Открыть занятие...</button></p>' +
            '</article>';
-
 }
 
 /* ============================================================
-   RENDERER.JS — дополнения для модульной архитектуры
+   6. ПЛИТКА МОДУЛЯ НА ГЛАВНОЙ
    ============================================================ */
 
-/** Плитка модуля для главной страницы. */
 function renderModuleCard(mod) {
     const isSoon = mod.status === 'soon';
     const cardCls = 'module-card' + (isSoon ? ' soon' : '');
@@ -139,7 +183,10 @@ function renderModuleCard(mod) {
            '</article>';
 }
 
-/** Лендинг модуля: обзор + сетка занятий. */
+/* ============================================================
+   7. ЛЕНДИНГ МОДУЛЯ: обзор + сетка занятий
+   ============================================================ */
+
 function renderModuleLanding(mod) {
     if (!mod.lessons || !mod.lessons.length) {
         return '<h2>' + mod.title + '</h2>' +
@@ -153,7 +200,9 @@ function renderModuleLanding(mod) {
                '<p class="lesson-subtitle"><em>' + lesson.subtitle + '</em></p>' +
                '<p class="lesson-meta-inline">' +
                '<span class="lesson-minutes">' + lesson.minutes + ' мин</span>' +
-               (lesson.tags ? ' · ' + lesson.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join(' ') : '') +
+               (lesson.tags ? ' · ' + lesson.tags.map(function (t) {
+                   return '<span class="tag">' + t + '</span>';
+               }).join(' ') : '') +
                '</p>' +
                '<p><button class="btn" onclick="switchPage(\'lesson-' + lesson.id + '\')">Открыть</button></p>' +
                '</article>';
@@ -180,14 +229,19 @@ function renderModuleLanding(mod) {
            '</div>';
 }
 
-/** Сайдбар: список модулей (на главной). */
+/* ============================================================
+   8. САЙДБАР: список модулей (на главной)
+   ============================================================ */
+
 function renderModulesSidebar() {
     const cards = MODULES.map(function (mod) {
         const cls = 'aside-btn' + (mod.status === 'soon' ? ' soon' : '');
         const action = mod.status === 'soon'
             ? 'disabled'
             : 'onclick="switchPage(\'module-' + mod.id + '\')"';
-        const count = mod.lessons ? ' <span class="badge">' + mod.lessons.length + ' занятий</span>' : ' <span class="badge">скоро</span>';
+        const count = mod.lessons
+            ? ' <span class="badge">' + mod.lessons.length + ' занятий</span>'
+            : ' <span class="badge">скоро</span>';
         return '<button class="' + cls + '" ' + action + '>' +
                mod.icon + ' ' + mod.title + count + '</button>';
     }).join('');
@@ -201,7 +255,10 @@ function renderModulesSidebar() {
            '</section>';
 }
 
-/** Сайдбар: навигация внутри модуля (занятия + инструменты). */
+/* ============================================================
+   9. САЙДБАР: навигация внутри модуля
+   ============================================================ */
+
 function renderModuleSidebar(mod, currentLessonId) {
     const back = '<p><button class="aside-btn" onclick="switchPage(\'home\')">← Все модули</button></p>';
 
@@ -221,7 +278,9 @@ function renderModuleSidebar(mod, currentLessonId) {
         ? '<p><button class="aside-btn" onclick="switchPage(\'tools-' + mod.id + '\')">🧮 ' + (mod.toolsTitle || 'Инструменты') + '</button></p>'
         : '';
 
-    const done = mod.lessons ? mod.lessons.filter(function (l) { return userProgress[l.id]; }).length : 0;
+    const done = mod.lessons
+        ? mod.lessons.filter(function (l) { return userProgress[l.id]; }).length
+        : 0;
     const total = mod.lessons ? mod.lessons.length : 0;
 
     return back +
