@@ -140,52 +140,62 @@ const QUANTUM_DIAGRAMS = {
     /* ----------------------------------------------------------
        ЗАНЯТИЕ 2. Вектор состояния в 3D
        ---------------------------------------------------------- */
-    'vector-3d': `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" role="img" aria-label="Вектор состояния в трёхмерном пространстве">
+        'vector-3d': `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Вектор состояния с равными проекциями на три оси">
   <style>
-    .t { font-family: sans-serif; font-size: 13px; fill: currentColor; }
-    .h { font-family: sans-serif; font-size: 14px; font-weight: bold; fill: currentColor; }
-    .l { stroke: currentColor; fill: none; stroke-width: 1.5; }
-    .d { stroke: currentColor; fill: none; stroke-width: 1; stroke-dasharray: 4 4; opacity: 0.5; }
+    .t { font-family: sans-serif; font-size: 12px; fill: currentColor; }
+    .h { font-family: sans-serif; font-size: 13px; font-weight: bold; fill: currentColor; }
+    .ax { stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .axp { stroke: currentColor; fill: none; stroke-width: 1; stroke-dasharray: 4 4; opacity: 0.5; }
     .a { stroke: #3498db; fill: none; stroke-width: 2.5; }
-    .ad { stroke: #3498db; fill: none; stroke-width: 1; stroke-dasharray: 3 3; }
+    .af { fill: #3498db; }
+    .proj { fill: #27ae60; }
+    .lbl { fill: #27ae60; font-family: sans-serif; font-size: 11px; font-weight: bold; }
+    .ctr { fill: currentColor; }
   </style>
 
-  <!-- Оси координат -->
-  <line x1="280" y1="320" x2="500" y2="320" class="l"/>
-  <path d="M 500 320 L 492 315 M 500 320 L 492 325" class="l"/>
-  <text x="510" y="325" class="h">X</text>
-  <text x="510" y="343" class="t">Коробка 1 (★)</text>
+  <!-- Оси -->
+  <line x1="280" y1="240" x2="470" y2="273" class="ax"/>
+  <path d="M 470 273 L 462 267 M 470 273 L 463 277" class="ax"/>
+  <text x="478" y="282" class="h">X</text>
+  <text x="478" y="298" class="t">Коробка 1 (★)</text>
 
-  <line x1="280" y1="320" x2="280" y2="80" class="l"/>
-  <path d="M 280 80 L 275 88 M 280 80 L 285 88" class="l"/>
-  <text x="270" y="72" class="h" text-anchor="end">Y</text>
-  <text x="270" y="90" class="t" text-anchor="end">Коробка 2</text>
+  <line x1="280" y1="240" x2="310" y2="70" class="ax"/>
+  <path d="M 310 70 L 304 78 M 310 70 L 315 78" class="ax"/>
+  <text x="316" y="70" class="h">Y</text>
+  <text x="316" y="86" class="t">Коробка 2</text>
 
-  <line x1="280" y1="320" x2="120" y2="360" class="l"/>
-  <path d="M 120 360 L 128 358 M 120 360 L 126 353" class="l"/>
-  <text x="110" y="375" class="h" text-anchor="middle">Z</text>
-  <text x="110" y="393" class="t" text-anchor="middle">Коробка 3</text>
+  <line x1="280" y1="240" x2="170" y2="130" class="ax"/>
+  <path d="M 170 130 L 178 132 M 170 130 L 176 137" class="ax"/>
+  <text x="160" y="124" class="h" text-anchor="end">Z</text>
+  <text x="160" y="140" class="t" text-anchor="end">Коробка 3</text>
 
-  <!-- Вектор состояния -->
-  <line x1="280" y1="320" x2="410" y2="150" class="a"/>
-  <path d="M 410 150 L 400 152 M 410 150 L 402 158" fill="#3498db"/>
+  <!-- Точки проекций -->
+  <circle cx="367" cy="257" r="5" class="proj"/>
+  <text x="378" y="252" class="lbl">+0,58</text>
 
-  <text x="420" y="145" class="h" fill="#3498db">Вектор состояния</text>
-  <text x="420" y="163" class="t">(+0,58; +0,58; +0,58)</text>
+  <circle cx="297" cy="153" r="5" class="proj"/>
+  <text x="308" y="150" class="lbl">+0,58</text>
 
-  <!-- Проекции -->
-  <line x1="410" y1="150" x2="410" y2="320" class="ad"/>
-  <line x1="410" y1="320" x2="280" y2="320" class="d"/>
+  <circle cx="219" cy="179" r="5" class="proj"/>
+  <text x="200" y="175" class="lbl" text-anchor="end">+0,58</text>
 
-  <circle cx="410" cy="320" r="4" fill="#3498db"/>
-  <text x="410" y="340" class="t" text-anchor="middle">+0,58</text>
+  <!-- Пунктиры от конца вектора к проекциям -->
+  <line x1="323" y1="109" x2="367" y2="257" class="axp"/>
+  <line x1="323" y1="109" x2="297" y2="153" class="axp"/>
+  <line x1="323" y1="109" x2="219" y2="179" class="axp"/>
 
-  <circle cx="280" cy="150" r="4" fill="#3498db"/>
-  <text x="268" y="154" class="t" text-anchor="end">+0,58</text>
+  <!-- Центр и вектор -->
+  <circle cx="280" cy="240" r="4" class="ctr"/>
+  <line x1="280" y1="240" x2="323" y2="109" class="a"/>
+  <path d="M 323 109 L 313 115 M 323 109 L 317 118" fill="#3498db"/>
 
-  <text x="280" y="40" class="h" text-anchor="middle">Стартовое состояние после гейта Адамара</text>
-  <text x="280" y="60" class="t" text-anchor="middle">Все проекции равны — все коробки равновероятны</text>
+  <text x="330" y="100" class="h" fill="#3498db">Вектор состояния</text>
+  <text x="330" y="118" class="t">Все проекции равны</text>
+
+  <text x="320" y="360" class="h" text-anchor="middle">Стартовое состояние после гейта Адамара</text>
+  <text x="320" y="380" class="t" text-anchor="middle">Все проекции +0,58 — все три коробки равновероятны</text>
+  <text x="320" y="400" class="t" text-anchor="middle">(схематично: точные пропорции 3D на плоскости не передать)</text>
 </svg>`.trim(),
 
     /* ----------------------------------------------------------
@@ -249,14 +259,17 @@ const QUANTUM_DIAGRAMS = {
   <!-- Панель 3: после диффузии -->
   <text x="630" y="52" class="h" text-anchor="middle">После диффузии</text>
   <line x1="540" y1="180" x2="720" y2="180" class="axis"/>
-  <rect x="555" y="60" width="40" height="120" class="bar-plus"/>
-  <text x="575" y="54" class="lbl">+0,96</text>
+  <!-- X: +0.96 → 132 px вверх -->
+  <rect x="555" y="48" width="40" height="132" class="bar-plus"/>
+  <text x="575" y="42" class="lbl">+0,96</text>
   <text x="575" y="200" class="lbl">X</text>
-  <rect x="615" y="180" width="40" height="30" class="bar-minus"/>
-  <text x="635" y="228" class="lbl">−0,20</text>
+  <!-- Y: −0.20 → 28 px вниз -->
+  <rect x="615" y="180" width="40" height="28" class="bar-minus"/>
+  <text x="635" y="226" class="lbl">−0,20</text>
   <text x="635" y="200" class="lbl">Y</text>
-  <rect x="675" y="180" width="40" height="30" class="bar-minus"/>
-  <text x="695" y="228" class="lbl">−0,20</text>
+  <!-- Z: −0.20 → 28 px вниз -->
+  <rect x="675" y="180" width="40" height="28" class="bar-minus"/>
+  <text x="695" y="226" class="lbl">−0,20</text>
   <text x="695" y="200" class="lbl">Z</text>
 
   <text x="630" y="270" class="t" text-anchor="middle">Правильная ось выросла,</text>
@@ -266,56 +279,71 @@ const QUANTUM_DIAGRAMS = {
     /* ----------------------------------------------------------
        ЗАНЯТИЕ 4. Вращение вектора по окружности
        ---------------------------------------------------------- */
-    'grover-rotation': `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 460" role="img" aria-label="Вращение вектора состояния по окружности">
+        'grover-rotation': `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-label="Вращение вектора состояния по окружности">
   <style>
     .t { font-family: sans-serif; font-size: 12px; fill: currentColor; }
     .h { font-family: sans-serif; font-size: 13px; font-weight: bold; fill: currentColor; }
     .ax { stroke: currentColor; fill: none; stroke-width: 1.5; }
-    .g { stroke: currentColor; fill: none; stroke-width: 1; opacity: 0.25; }
+    .circ { stroke: currentColor; fill: none; stroke-width: 1; opacity: 0.35; }
     .a { stroke: #3498db; fill: none; stroke-width: 2.5; }
     .af { fill: #3498db; }
-    .am { stroke: #e67e22; fill: none; stroke-width: 2; }
+    .am { stroke: #e67e22; fill: none; stroke-width: 2.5; }
     .amf { fill: #e67e22; }
-    .ar { stroke: #c0392b; fill: none; stroke-width: 2; stroke-dasharray: 5 4; }
+    .ar { stroke: #c0392b; fill: none; stroke-width: 2.5; stroke-dasharray: 5 4; }
+    .arc { stroke: #27ae60; fill: none; stroke-width: 1.5; }
+    .ctr { fill: currentColor; }
   </style>
 
-  <!-- Круг -->
-  <circle cx="280" cy="240" r="150" class="g"/>
-  <circle cx="280" cy="240" r="3" class="af"/>
+  <!-- Круг вращения -->
+  <circle cx="300" cy="260" r="150" class="circ"/>
+  <circle cx="300" cy="260" r="4" class="ctr"/>
 
   <!-- Оси -->
-  <line x1="100" y1="240" x2="470" y2="240" class="ax"/>
-  <path d="M 470 240 L 462 235 M 470 240 L 462 245" class="ax"/>
-  <text x="478" y="244" class="t">ошибки</text>
+  <line x1="120" y1="260" x2="500" y2="260" class="ax"/>
+  <path d="M 500 260 L 492 255 M 500 260 L 492 265" class="ax"/>
+  <text x="510" y="264" class="t">ошибки</text>
 
-  <line x1="280" y1="410" x2="280" y2="70" class="ax"/>
-  <path d="M 280 70 L 275 78 M 280 70 L 285 78" class="ax"/>
-  <text x="280" y="60" class="h" text-anchor="middle">правильный ответ</text>
+  <line x1="300" y1="440" x2="300" y2="80" class="ax"/>
+  <path d="M 300 80 L 295 88 M 300 80 L 305 88" class="ax"/>
+  <text x="300" y="70" class="h" text-anchor="middle">правильный ответ</text>
 
-  <!-- Вектор на разных итерациях -->
-  <!-- Старт -->
-  <line x1="280" y1="240" x2="390" y2="230" class="a"/>
-  <circle cx="390" cy="230" r="4" class="af"/>
-  <text x="395" y="245" class="t">Старт</text>
+  <!-- Дуги углов -->
+  <path d="M 350 260 A 50 50 0 0 1 348 247" class="arc"/>
+  <text x="358" y="250" class="t" fill="#27ae60">θ</text>
 
-  <!-- После 1 итерации -->
-  <line x1="280" y1="240" x2="350" y2="140" class="a"/>
-  <circle cx="350" cy="140" r="4" class="af"/>
-  <text x="355" y="135" class="t">Итерация 1</text>
+  <path d="M 348 247 A 50 50 0 0 1 335 224" class="arc"/>
+  <text x="352" y="225" class="t" fill="#27ae60">2θ</text>
 
-  <!-- После 2 итераций -->
-  <line x1="280" y1="240" x2="200" y2="130" class="am"/>
-  <circle cx="200" cy="130" r="4" class="amf"/>
-  <text x="195" y="125" class="t" text-anchor="end">Итерация 2</text>
+  <path d="M 335 224 A 50 50 0 0 1 313 212" class="arc"/>
+  <text x="315" y="200" class="t" fill="#27ae60">2θ</text>
 
-  <!-- После 3 итераций — перелёт -->
-  <line x1="280" y1="240" x2="160" y2="290" class="ar"/>
-  <circle cx="160" cy="290" r="4" fill="#c0392b"/>
-  <text x="155" y="305" class="t" text-anchor="end" fill="#c0392b">Перелёт</text>
+  <path d="M 313 212 A 50 50 0 0 1 288 212" class="arc"/>
+  <text x="280" y="195" class="t" fill="#27ae60" text-anchor="end">2θ</text>
 
-  <text x="280" y="440" class="t" text-anchor="middle">Каждая итерация поворачивает стрелку на фиксированный угол.</text>
-  <text x="280" y="455" class="t" text-anchor="middle">Момент измерения — на пике, до перелёта.</text>
+  <!-- Векторы (все длиной 150) -->
+  <!-- Старт: 15° -->
+  <line x1="300" y1="260" x2="445" y2="221" class="a"/>
+  <circle cx="445" cy="221" r="4" class="af"/>
+  <text x="450" y="220" class="t">Старт (θ)</text>
+
+  <!-- После 1 итерации: 45° -->
+  <line x1="300" y1="260" x2="406" y2="154" class="a"/>
+  <circle cx="406" cy="154" r="4" class="af"/>
+  <text x="412" y="150" class="t">Итерация 1 (3θ)</text>
+
+  <!-- После 2 итераций: 75° -->
+  <line x1="300" y1="260" x2="339" y2="115" class="am"/>
+  <circle cx="339" cy="115" r="4" class="amf"/>
+  <text x="345" y="112" class="t" fill="#e67e22">Итерация 2 (5θ)</text>
+
+  <!-- Перелёт: 105° -->
+  <line x1="300" y1="260" x2="261" y2="115" class="ar"/>
+  <circle cx="261" cy="115" r="4" fill="#c0392b"/>
+  <text x="255" y="112" class="t" fill="#c0392b" text-anchor="end">Перелёт (7θ)</text>
+
+  <text x="300" y="460" class="t" text-anchor="middle">Все векторы одной длины — состояние вращается, не растягивается.</text>
+  <text x="300" y="475" class="t" text-anchor="middle">Каждая итерация прибавляет угол 2θ. Пик — на вертикали.</text>
 </svg>`.trim(),
 
     /* ----------------------------------------------------------
@@ -439,8 +467,8 @@ const QUANTUM_DIAGRAMS = {
   <text x="350" y="358" class="t" text-anchor="middle">10 000</text>
   <text x="500" y="358" class="t" text-anchor="middle">10⁶</text>
   <text x="650" y="358" class="t" text-anchor="middle">10⁹</text>
-
   <text x="360" y="388" class="t" text-anchor="middle">Чем ниже кривая — тем быстрее алгоритм на больших N.</text>
+  <text x="360" y="406" class="t" text-anchor="middle" font-style="italic" opacity="0.7">Шкала условная: на линейной оси log N был бы почти неотличим от нуля.</text>
 </svg>`.trim(),
 
     /* ----------------------------------------------------------
@@ -497,6 +525,129 @@ const QUANTUM_DIAGRAMS = {
   <line x1="640" y1="140" x2="640" y2="100" class="ar"/>
   <circle cx="640" cy="100" r="4" fill="#c0392b"/>
   <text x="640" y="226" class="t" text-anchor="middle">Стрелка застряла на оси</text>
+</svg>`.trim()
+
+    ,
+
+    /* ----------------------------------------------------------
+       ЗАНЯТИЕ 7. Однокубитные гейты
+       ---------------------------------------------------------- */
+    'gates-single': `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" role="img" aria-label="Однокубитные гейты">
+  <style>
+    .t { font-family: sans-serif; font-size: 12px; fill: currentColor; }
+    .h { font-family: sans-serif; font-size: 13px; font-weight: bold; fill: currentColor; }
+    .ax { stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .a { stroke: #3498db; fill: none; stroke-width: 2.5; }
+    .af { fill: #3498db; }
+    .g { stroke: #27ae60; fill: none; stroke-width: 2; }
+    .gf { fill: #27ae60; }
+  </style>
+
+  <text x="360" y="24" class="h" text-anchor="middle">Как гейты меняют стрелку кубита</text>
+
+  <!-- Гейт X -->
+  <text x="120" y="56" class="h" text-anchor="middle">X — переворот</text>
+  <circle cx="120" cy="140" r="55" class="ax" opacity="0.3"/>
+  <line x1="65" y1="140" x2="175" y2="140" class="ax" opacity="0.3"/>
+  <line x1="120" y1="85" x2="120" y2="195" class="ax" opacity="0.3"/>
+  <line x1="120" y1="140" x2="120" y2="90" class="a"/>
+  <circle cx="120" cy="90" r="4" class="af"/>
+  <text x="120" y="225" class="t" text-anchor="middle">|0⟩ → |1⟩</text>
+
+  <path d="M 195 140 L 235 140" class="g"/>
+  <path d="M 230 135 L 235 140 L 230 145" class="g"/>
+
+  <circle cx="300" cy="140" r="55" class="ax" opacity="0.3"/>
+  <line x1="245" y1="140" x2="355" y2="140" class="ax" opacity="0.3"/>
+  <line x1="300" y1="85" x2="300" y2="195" class="ax" opacity="0.3"/>
+  <line x1="300" y1="140" x2="300" y2="190" class="a"/>
+  <circle cx="300" cy="190" r="4" class="af"/>
+  <text x="300" y="225" class="t" text-anchor="middle">Результат</text>
+
+  <!-- Гейт H -->
+  <text x="500" y="56" class="h" text-anchor="middle">H — суперпозиция</text>
+  <circle cx="500" cy="140" r="55" class="ax" opacity="0.3"/>
+  <line x1="445" y1="140" x2="555" y2="140" class="ax" opacity="0.3"/>
+  <line x1="500" y1="85" x2="500" y2="195" class="ax" opacity="0.3"/>
+  <line x1="500" y1="140" x2="500" y2="90" class="a"/>
+  <circle cx="500" cy="90" r="4" class="af"/>
+  <text x="500" y="225" class="t" text-anchor="middle">|0⟩</text>
+
+  <path d="M 575 140 L 615 140" class="g"/>
+  <path d="M 610 135 L 615 140 L 610 145" class="g"/>
+
+  <circle cx="680" cy="140" r="55" class="ax" opacity="0.3"/>
+  <line x1="625" y1="140" x2="735" y2="140" class="ax" opacity="0.3"/>
+  <line x1="680" y1="85" x2="680" y2="195" class="ax" opacity="0.3"/>
+  <line x1="680" y1="140" x2="720" y2="100" class="a"/>
+  <circle cx="720" cy="100" r="4" class="af"/>
+  <text x="680" y="225" class="t" text-anchor="middle">(|0⟩+|1⟩)/√2</text>
+
+  <text x="360" y="290" class="h" text-anchor="middle">Таблица действий гейтов на базисные состояния</text>
+  <text x="180" y="320" class="t" text-anchor="middle">X: |0⟩→|1⟩, |1⟩→|0⟩</text>
+  <text x="540" y="320" class="t" text-anchor="middle">Z: |0⟩→|0⟩, |1⟩→−|1⟩</text>
+  <text x="180" y="345" class="t" text-anchor="middle">H: |0⟩→(|0⟩+|1⟩)/√2</text>
+  <text x="540" y="345" class="t" text-anchor="middle">S: |0⟩→|0⟩, |1⟩→i|1⟩</text>
+</svg>`.trim(),
+
+    /* ----------------------------------------------------------
+       ЗАНЯТИЕ 8. Двухкубитные гейты
+       ---------------------------------------------------------- */
+    'gates-double': `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" role="img" aria-label="Двухкубитные гейты">
+  <style>
+    .t { font-family: sans-serif; font-size: 12px; fill: currentColor; }
+    .h { font-family: sans-serif; font-size: 13px; font-weight: bold; fill: currentColor; }
+    .l { stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .c { stroke: #3498db; fill: none; stroke-width: 2.5; }
+    .cf { fill: #3498db; }
+    .g { stroke: #27ae60; fill: none; stroke-width: 2; }
+    .gf { fill: #27ae60; }
+  </style>
+
+  <text x="360" y="24" class="h" text-anchor="middle">Двухкубитные гейты</text>
+
+  <!-- CNOT схема -->
+  <text x="180" y="60" class="h" text-anchor="middle">CNOT</text>
+  <line x1="60" y1="110" x2="300" y2="110" class="l"/>
+  <line x1="60" y1="170" x2="300" y2="170" class="l"/>
+  <circle cx="180" cy="110" r="8" class="cf"/>
+  <circle cx="180" cy="170" r="14" class="c"/>
+  <line x1="180" y1="156" x2="180" y2="184" class="c"/>
+  <line x1="166" y1="170" x2="194" y2="170" class="c"/>
+
+  <text x="30" y="115" class="t">a</text>
+  <text x="30" y="175" class="t">b</text>
+  <text x="310" y="115" class="t">a</text>
+  <text x="310" y="175" class="t">a⊕b</text>
+
+  <text x="180" y="210" class="t" text-anchor="middle">управляющий → цель</text>
+
+  <!-- CZ схема -->
+  <text x="540" y="60" class="h" text-anchor="middle">CZ</text>
+  <line x1="420" y1="110" x2="660" y2="110" class="l"/>
+  <line x1="420" y1="170" x2="660" y2="170" class="l"/>
+  <circle cx="540" cy="110" r="8" class="cf"/>
+  <circle cx="540" cy="170" r="8" class="cf"/>
+  <line x1="540" y1="118" x2="540" y2="162" class="c"/>
+
+  <text x="390" y="115" class="t">a</text>
+  <text x="390" y="175" class="t">b</text>
+  <text x="670" y="115" class="t">a</text>
+  <text x="670" y="175" class="t">b</text>
+
+  <text x="540" y="210" class="t" text-anchor="middle">симметричный гейт</text>
+
+  <!-- Таблица -->
+  <text x="360" y="260" class="h" text-anchor="middle">Что делает CNOT</text>
+  <text x="180" y="295" class="t" text-anchor="middle">|00⟩ → |00⟩</text>
+  <text x="540" y="295" class="t" text-anchor="middle">|10⟩ → |11⟩</text>
+  <text x="180" y="320" class="t" text-anchor="middle">|01⟩ → |01⟩</text>
+  <text x="540" y="320" class="t" text-anchor="middle">|11⟩ → |10⟩</text>
+
+  <text x="360" y="365" class="h" text-anchor="middle">H + CNOT = состояние Белла (|00⟩ + |11⟩)/√2</text>
+  <text x="360" y="388" class="t" text-anchor="middle">Так рождается запутанность</text>
 </svg>`.trim()
 
 };
