@@ -58,21 +58,11 @@ function renderHomework(lesson) {
 function renderLessonNav(mod, lesson) {
     const adj = getAdjacentLessons(mod, lesson.id);
     const parts = ['<nav class="lesson-nav">'];
-
-    if (adj.prev) {
-        parts.push('<button class="btn btn-secondary" onclick="switchPage(\'lesson-' + adj.prev.id + '\')" title="' + adj.prev.title + '">← ' + adj.prev.num + '. Предыдущее</button>');
-    } else {
-        parts.push('<span></span>');
-    }
-
+    if (adj.prev) parts.push('<button class="btn btn-secondary" onclick="switchPage(\'lesson-' + adj.prev.id + '\')">← ' + adj.prev.num + '. Предыдущее</button>');
+    else parts.push('<span></span>');
     parts.push('<button class="btn" onclick="switchPage(\'module-' + mod.id + '\')">↑ К модулю</button>');
-
-    if (adj.next) {
-        parts.push('<button class="btn btn-secondary" onclick="switchPage(\'lesson-' + adj.next.id + '\')" title="' + adj.next.title + '">Следующее: ' + adj.next.num + '. →</button>');
-    } else {
-        parts.push('<span></span>');
-    }
-
+    if (adj.next) parts.push('<button class="btn btn-secondary" onclick="switchPage(\'lesson-' + adj.next.id + '\')">Следующее: ' + adj.next.num + '. →</button>');
+    else parts.push('<span></span>');
     parts.push('</nav>');
     parts.push('<p class="lesson-position">Занятие ' + adj.index + ' из ' + adj.total + '</p>');
     return parts.join('');
@@ -114,9 +104,7 @@ function renderModuleCard(mod) {
 
 function renderModuleLanding(mod) {
     const lessons = getModuleLessons(mod);
-    if (!lessons.length) {
-        return '<h2>' + mod.title + '</h2><p>Модуль в разработке.</p>';
-    }
+    if (!lessons.length) return '<h2>' + mod.title + '</h2><p>Модуль в разработке.</p>';
     const lessonCards = lessons.map(function (lesson) {
         return '<article class="lesson-card"><h4>Занятие ' + lesson.num + '. ' + lesson.title + '</h4>' +
                '<p class="lesson-subtitle"><em>' + lesson.subtitle + '</em></p>' +
@@ -124,25 +112,20 @@ function renderModuleLanding(mod) {
                (lesson.tags ? ' · ' + lesson.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join(' ') : '') +
                '</p><p><button class="btn" onclick="switchPage(\'lesson-' + lesson.id + '\')">Открыть</button></p></article>';
     }).join('');
-
     const toolsBtn = mod.hasTools
         ? '<p><button class="btn" onclick="switchPage(\'tools-' + mod.id + '\')">🧮 ' + (mod.toolsTitle || 'Инструменты') + '</button></p>'
         : '';
     const meta = mod.meta
         ? '<p class="module-meta">📘 ' + mod.meta.hours + ' ч · ' + mod.meta.weeks + ' недель · уровень: ' + mod.meta.level + '</p>'
         : '';
-
     const adjMod = getAdjacentModules(mod.id);
     const modNav = ['<nav class="module-nav">'];
-    if (adjMod.prev) {
-        modNav.push('<button class="btn btn-secondary" onclick="switchPage(\'module-' + adjMod.prev.id + '\')">← ' + adjMod.prev.icon + ' ' + adjMod.prev.title + '</button>');
-    } else { modNav.push('<span></span>'); }
+    if (adjMod.prev) modNav.push('<button class="btn btn-secondary" onclick="switchPage(\'module-' + adjMod.prev.id + '\')">← ' + adjMod.prev.icon + ' ' + adjMod.prev.title + '</button>');
+    else modNav.push('<span></span>');
     modNav.push('<button class="btn" onclick="switchPage(\'home\')">Все модули</button>');
-    if (adjMod.next) {
-        modNav.push('<button class="btn btn-secondary" onclick="switchPage(\'module-' + adjMod.next.id + '\')">' + adjMod.next.icon + ' ' + adjMod.next.title + ' →</button>');
-    } else { modNav.push('<span></span>'); }
+    if (adjMod.next) modNav.push('<button class="btn btn-secondary" onclick="switchPage(\'module-' + adjMod.next.id + '\')">' + adjMod.next.icon + ' ' + adjMod.next.title + ' →</button>');
+    else modNav.push('<span></span>');
     modNav.push('</nav>');
-
     return '<div class="module-landing">' +
            '<p class="breadcrumbs"><a href="#home" onclick="switchPage(\'home\'); return false;">Главная</a> › ' + mod.title + '</p>' +
            '<h2>' + mod.icon + ' ' + mod.title + '</h2>' +

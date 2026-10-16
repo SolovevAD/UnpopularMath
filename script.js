@@ -12,9 +12,6 @@ let userProgress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 let currentModuleId = null;
 let pageGeneration = 0;
 
-/* ============================================================
-   1. ИНИЦИАЛИЗАЦИЯ
-   ============================================================ */
 document.addEventListener('DOMContentLoaded', function () {
     initTheme();
     buildHomeModules();
@@ -42,18 +39,12 @@ async function applyHash() {
     await showPage(hash);
 }
 
-/* ============================================================
-   2. ГЛАВНАЯ
-   ============================================================ */
 function buildHomeModules() {
     const grid = document.getElementById('modules-grid');
     if (!grid) return;
     grid.innerHTML = MODULES.map(renderModuleCard).join('');
 }
 
-/* ============================================================
-   3. ЛЕНИВОЕ СОЗДАНИЕ СЕКЦИЙ
-   ============================================================ */
 function ensurePageSection(sectionId, containerId) {
     let section = document.getElementById(sectionId);
     if (section) return section;
@@ -66,9 +57,6 @@ function ensurePageSection(sectionId, containerId) {
     return section;
 }
 
-/* ============================================================
-   4. РОУТЕР
-   ============================================================ */
 async function switchPage(pageId) {
     location.hash = pageId;
 }
@@ -131,9 +119,6 @@ async function showPage(pageId) {
     closeSidebar();
 }
 
-/* ============================================================
-   5. САЙДБАР
-   ============================================================ */
 function updateSidebar(currentPageId) {
     const aside = document.getElementById('sidebar');
     if (!aside) return;
@@ -148,9 +133,6 @@ function updateSidebar(currentPageId) {
     aside.innerHTML = renderModuleSidebar(mod, lessonId);
 }
 
-/* ============================================================
-   6. МОБИЛЬНЫЙ САЙДБАР
-   ============================================================ */
 function toggleSidebar() {
     const aside = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
@@ -166,9 +148,6 @@ function closeSidebar() {
     overlay.classList.remove('open');
 }
 
-/* ============================================================
-   7. ПРОГРЕСС / КВИЗЫ
-   ============================================================ */
 function checkQuiz(quizName, resultId, progressKey) {
     const resultText = document.getElementById(resultId);
     const selected = document.querySelector('input[name="' + quizName + '"]:checked');
@@ -203,9 +182,6 @@ function resetProgress() {
     gateScore = 0; gateTotal = 0; gateReady = false; updateGateScore();
 }
 
-/* ============================================================
-   8. ТЕМА
-   ============================================================ */
 function initTheme() {
     const saved = localStorage.getItem(THEME_KEY) || 'light';
     document.documentElement.setAttribute('data-theme', saved);
@@ -217,9 +193,6 @@ function toggleTheme() {
     localStorage.setItem(THEME_KEY, next);
 }
 
-/* ============================================================
-   9. КАЛЬКУЛЯТОРЫ
-   ============================================================ */
 function calculateSystems() {
     const inputVal = document.getElementById('dec-input').value;
     const resBin = document.getElementById('res-bin');
@@ -336,12 +309,11 @@ function runAdvCalc() {
     }
 }
 
-/* ============================================================
-   10. ТРЕНАЖЁР СИСТЕМ СЧИСЛЕНИЯ
-   ============================================================ */
 let trainerScore = 0, trainerTotal = 0, trainerAnswer = '', trainerReady = false;
 
 function ensureTrainerReady() {
+    const taskEl = document.getElementById('trainer-task');
+    if (!taskEl) return;
     if (!trainerReady) {
         const stats = JSON.parse(localStorage.getItem(TRAINER_KEY) || 'null');
         if (stats) { trainerScore = stats.score; trainerTotal = stats.total; }
@@ -393,9 +365,6 @@ function checkTrainer() {
     }, 900);
 }
 
-/* ============================================================
-   11. МОДАЛЬНЫЕ ОКНА
-   ============================================================ */
 function openModal(dialogId) {
     const d = document.getElementById(dialogId);
     if (d && typeof d.showModal === 'function') d.showModal();
