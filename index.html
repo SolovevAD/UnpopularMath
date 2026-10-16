@@ -44,12 +44,12 @@
                 <ul>
                     <li><strong>Полный курс систем счисления</strong> — 17 занятий с теорией, практикой и инструментами.</li>
                     <li><strong>Квантовый компьютер</strong> — интенсив из 9 занятий по геометрии квантовых вычислений.</li>
+                    <li><strong>Алгебра логики</strong> — 10 занятий: от высказываний до синтеза схем.</li>
+                    <li><strong>Теория графов</strong> — 10 занятий: обходы, кратчайшие пути, остовные деревья.</li>
                 </ul>
                 <h3>Что появится в будущем</h3>
                 <ul>
                     <li>Конечные автоматы и регулярные языки.</li>
-                    <li>Теория графов и алгоритмы на графах.</li>
-                    <li>Алгебра логики и минимизация булевых функций.</li>
                     <li>Комбинаторика и дискретная вероятность.</li>
                     <li>Теория кодирования и помехоустойчивые коды.</li>
                 </ul>
@@ -134,6 +134,75 @@
                 </section>
             </section>
 
+            <section id="page-tools-boolean-algebra" class="page">
+                <h2>Тренажёр по алгебре логики</h2>
+                <p><button class="btn btn-secondary" onclick="switchPage('module-boolean-algebra')">← К модулю «Алгебра логики»</button></p>
+
+                <section class="quiz-box">
+                    <p>Тренажёр охватывает 4 типа задач: вычисление выражений, закон де Моргана, подсчёт единиц в таблице истинности, упрощение выражений.</p>
+                    <p>Счёт: <strong id="logic-score">0</strong> правильно / <span id="logic-total">0</span> попыток</p>
+                    <p class="trainer-task" id="logic-task">Загрузка задания…</p>
+                    <div id="logic-options"></div>
+                    <p class="quiz-status" id="logic-feedback"></p>
+                    <details id="logic-hint" class="quiz-hint">
+                        <summary>Показать подсказку</summary>
+                        <p id="logic-hint-text"></p>
+                    </details>
+                    <p><button class="btn btn-secondary" onclick="newLogicTask()">Пропустить</button></p>
+                </section>
+
+                <hr>
+
+                <section>
+                    <h3>Шпаргалка по логике</h3>
+                    <table>
+                        <thead><tr><th>Операция</th><th>Обозначение</th><th>Истинна, когда</th></tr></thead>
+                        <tbody>
+                            <tr><td>NOT</td><td>¬A</td><td>A ложно</td></tr>
+                            <tr><td>AND</td><td>A ∧ B</td><td>оба истинны</td></tr>
+                            <tr><td>OR</td><td>A ∨ B</td><td>хотя бы один истинен</td></tr>
+                            <tr><td>XOR</td><td>A ⊕ B</td><td>A ≠ B</td></tr>
+                            <tr><td>Импликация</td><td>A → B</td><td>A ложно или B истинно</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+
+            <section id="page-tools-graphs" class="page">
+                <h2>Тренажёр по теории графов</h2>
+                <p><button class="btn btn-secondary" onclick="switchPage('module-graphs')">← К модулю «Теория графов»</button></p>
+
+                <section class="quiz-box">
+                    <p>Тренажёр охватывает 4 типа задач: подсчёт суммы степеней, число рёбер по матрице смежности, определение двудольности, кратчайший путь.</p>
+                    <p>Счёт: <strong id="graph-score">0</strong> правильно / <span id="graph-total">0</span> попыток</p>
+                    <p class="trainer-task" id="graph-task">Загрузка задания…</p>
+                    <div id="graph-options"></div>
+                    <p class="quiz-status" id="graph-feedback"></p>
+                    <details id="graph-hint" class="quiz-hint">
+                        <summary>Показать подсказку</summary>
+                        <p id="graph-hint-text"></p>
+                    </details>
+                    <p><button class="btn btn-secondary" onclick="newGraphTask()">Пропустить</button></p>
+                </section>
+
+                <hr>
+
+                <section>
+                    <h3>Шпаргалка по графам</h3>
+                    <table>
+                        <thead><tr><th>Понятие</th><th>Формула / идея</th></tr></thead>
+                        <tbody>
+                            <tr><td>Сумма степеней</td><td>= 2 × (число рёбер)</td></tr>
+                            <tr><td>Дерево</td><td>n вершин, n−1 рёбер, без циклов</td></tr>
+                            <tr><td>Двудольность</td><td>Все циклы чётной длины</td></tr>
+                            <tr><td>Эйлеров цикл</td><td>Все степени чётные</td></tr>
+                            <tr><td>Кратчайший путь</td><td>Алгоритм Дейкстры</td></tr>
+                            <tr><td>MST</td><td>Краскал (O(E log E)) или Прим</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+
             <div id="modules-container"></div>
             <div id="lessons-container"></div>
         </main>
@@ -151,11 +220,4 @@
         </section>
     </footer>
 
-    <script src="modules.js"></script>
-    <script src="course-loader.js"></script>
-    <script src="renderer.js"></script>
-    <script src="quantum-diagrams.js"></script>
-    <script src="quantum-gates-trainer.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+    <script src="modules.js">

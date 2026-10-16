@@ -33,6 +33,34 @@ const MODULES = [
         meta: { hours: 10, weeks: 2, level: 'средний' }
     },
     {
+        id: 'boolean-algebra',
+        icon: '⊕',
+        title: 'Алгебра логики',
+        subtitle: '10 занятий: от высказываний до сумматоров',
+        description: 'Полный курс алгебры логики: базовые операции, таблицы истинности, законы де Моргана, СДНФ и СКНФ, карты Карно, минимизация и синтез логических схем.',
+        status: 'available',
+        courseFile: 'course-logic.js',
+        courseVar: 'COURSE_LOGIC',
+        lessonCount: 10,
+        hasTools: true,
+        toolsTitle: 'Тренажёр по логике',
+        meta: { hours: 12, weeks: 3, level: 'базовый' }
+    },
+    {
+        id: 'graphs',
+        icon: '🕸️',
+        title: 'Теория графов',
+        subtitle: '10 занятий: от степеней до алгоритмов на графах',
+        description: 'Основы теории графов и алгоритмы на них: BFS, DFS, алгоритм Дейкстры, минимальное остовное дерево, эйлеровы и гамильтоновы пути.',
+        status: 'available',
+        courseFile: 'course-graphs.js',
+        courseVar: 'COURSE_GRAPHS',
+        lessonCount: 10,
+        hasTools: true,
+        toolsTitle: 'Тренажёр по графам',
+        meta: { hours: 13, weeks: 3, level: 'средний' }
+    },
+    {
         id: 'finite-automata',
         icon: '⚙️',
         title: 'Конечные автоматы',
@@ -40,24 +68,6 @@ const MODULES = [
         description: 'Как машины распознают языки. Детерминированные и недетерминированные автоматы, регулярные выражения, теорема Клини, минимизация состояний.',
         status: 'soon',
         meta: { hours: 24, weeks: 12, level: 'средний' }
-    },
-    {
-        id: 'graphs',
-        icon: '🕸️',
-        title: 'Теория графов',
-        subtitle: 'Обходы, кратчайшие пути, потоки',
-        description: 'Основы теории графов и алгоритмы на них: BFS, DFS, Дейкстра, Краскал, Форд-Фалкерсон, двудольные графы и паросочетания.',
-        status: 'soon',
-        meta: { hours: 28, weeks: 14, level: 'средний' }
-    },
-    {
-        id: 'boolean-algebra',
-        icon: '⊕',
-        title: 'Алгебра логики',
-        subtitle: 'Булевы функции, минимизация, схемы',
-        description: 'Логические операции, таблицы истинности, СДНФ и СКНФ, карты Карно, минимизация булевых функций и синтез комбинационных схем.',
-        status: 'soon',
-        meta: { hours: 22, weeks: 11, level: 'базовый' }
     },
     {
         id: 'combinatorics',
