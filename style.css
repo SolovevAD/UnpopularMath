@@ -1,7 +1,7 @@
-/* 1. ГЛОБАЛЬНЫЙ СБРОС И ПЕРЕМЕННЫЕ */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+/* ============================================================
+   БЛОК 1. Базовые стили (не трогаем — это исходник)
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
 
 :root {
     --bg-color: #fafafa;
@@ -31,7 +31,6 @@
     --quiz-border: #555555;
 }
 
-/* 2. БАЗОВЫЕ СТИЛИ СТРАНИЦЫ */
 body {
     font-family: sans-serif;
     line-height: 1.6;
@@ -70,12 +69,11 @@ nav ul li { display: inline; margin-right: 20px; }
     font-weight: bold;
 }
 
-/* 3. ДВУХКОЛОНОЧНЫЙ МАКЕТ */
 wrapper {
     display: flex;
     gap: 20px;
     align-items: flex-start;
-    flex-direction: row-reverse; 
+    flex-direction: row-reverse;
 }
 
 main {
@@ -97,13 +95,14 @@ aside {
     top: 20px;
 }
 
-/* Скрытие/отображение вкладок SPA */
 section.page { display: none; }
 section.page.active { display: block; }
 
-/* 4. КОМПОНЕНТЫ И ФОРМЫ */
 .btn { background: var(--accent-color); color: #fff; border: none; padding: 8px 16px; cursor: pointer; border-radius: 4px; font-weight: bold; }
 .btn:hover { background: var(--accent-hover); }
+.btn-secondary { background: transparent; color: var(--accent-color); border: 1px solid var(--accent-color); }
+.btn-secondary:hover { background: var(--accent-color); color: #fff; }
+.btn-disabled { background: #bdc3c7 !important; cursor: not-allowed; opacity: 0.8; }
 
 .aside-btn {
     display: block;
@@ -120,6 +119,10 @@ section.page.active { display: block; }
     transition: background 0.2s;
 }
 .aside-btn:hover { border-color: var(--accent-color); background: var(--main-bg); }
+.aside-btn.active { border-color: var(--accent-color); background: var(--quiz-bg); font-weight: bold; }
+.aside-btn.soon { opacity: 0.5; cursor: not-allowed; }
+.aside-btn.reset { margin-top: 8px; color: #c0392b; border-color: #c0392b; text-align: center; font-size: 12px; }
+.aside-btn.reset:hover { background: #c0392b; color: #fff; }
 
 .badge { font-weight: bold; font-size: 11px; color: #7f8c8d; }
 .badge.success { color: #27ae60; }
@@ -132,127 +135,15 @@ table { border-collapse: collapse; width: 100%; max-width: 600px; margin: 15px 0
 th, td { border: 1px solid var(--border-color); padding: 10px; text-align: center; }
 th { background-color: var(--bg-color); }
 
-.code-text { background: var(--bg-color); padding: 12px; border-left: 4px solid var(--accent-color); font-family: monospace; color: var(--text-color); }
+.code-text { background: var(--bg-color); padding: 12px; border-left: 4px solid var(--accent-color); font-family: monospace; color: var(--text-color); overflow-x: auto; }
 .info-text { background: var(--quiz-bg); padding: 12px; border-left: 4px solid var(--accent-color); }
 .quiz-box { background: var(--quiz-bg); padding: 15px; border: 1px dashed var(--quiz-border); border-radius: 6px; margin-top: 20px; }
 .quiz-status { font-weight: bold; margin-top: 10px; }
 
-/* 5. МОДАЛЬНЫЕ ОКНА */
-dialog { 
-    max-width: 750px; 
-    width: 90%; 
-    padding: 30px; 
-    border-radius: 8px; 
-    border: 1px solid var(--border-color); 
-    background-color: var(--main-bg) !important; 
-    color: var(--text-color) !important; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
-}
-
-dialog::backdrop { 
-    background: rgba(0, 0, 0, 0.75); 
-    backdrop-filter: blur(3px); 
-}
-
-.close-btn { background: #e74c3c; color: #fff; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; float: right; font-weight: bold; }
-.close-btn:hover { background: #c0392b; }
-
-/* 6. ПОДВАЛ */
 footer { margin-top: 30px; font-size: 14px; color: #7f8c8d; }
 .footer-layout { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; }
 .project-info { max-width: 600px; }
 
-/* Адаптивный брейкпоинт */
-@media (max-width: 768px) {
-    wrapper { flex-direction: column; }
-    aside, main { flex: none; width: 100%; }
-    aside { position: static; }
-}
-
-/* ============================================================
-   ДОБАВЛЕНО: новые стили (совместимы с оригиналом)
-   ============================================================ */
-
-/* Универсальный калькулятор */
-.calc-controls {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 12px;
-    margin: 12px 0;
-}
-.calc-controls label {
-    display: flex;
-    flex-direction: column;
-    font-size: 13px;
-    font-weight: bold;
-    gap: 4px;
-}
-.calc-controls input {
-    padding: 8px;
-    font-size: 15px;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    background: var(--main-bg);
-    color: var(--text-color);
-    width: 100%;
-    max-width: none;
-}
-@media (max-width: 520px) {
-    .calc-controls { grid-template-columns: 1fr; }
-}
-
-.calc-result { font-size: 16px; }
-.calc-result code {
-    background: var(--main-bg);
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    font-size: 16px;
-    word-break: break-all;
-}
-.calc-error { color: #c0392b; min-height: 1.2em; margin: 4px 0; }
-
-details {
-    margin-top: 12px;
-    background: var(--main-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 8px 12px;
-}
-details summary { cursor: pointer; font-weight: bold; user-select: none; }
-details[open] summary { margin-bottom: 8px; }
-
-/* Тренажёр */
-.trainer-task { font-size: 18px; margin: 8px 0 14px; }
-#trainer-input {
-    padding: 8px 12px;
-    font-size: 16px;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    background: var(--main-bg);
-    color: var(--text-color);
-    width: 220px;
-    max-width: 100%;
-    margin-right: 6px;
-}
-.btn-secondary {
-    background: transparent;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-}
-.btn-secondary:hover { background: var(--accent-color); color: #fff; }
-
-/* Кнопка сброса прогресса */
-.aside-btn.reset {
-    margin-top: 8px;
-    color: #c0392b;
-    border-color: #c0392b;
-    text-align: center;
-    font-size: 12px;
-}
-.aside-btn.reset:hover { background: #c0392b; color: #fff; }
-
-/* Кнопка «наверх» */
 #back-to-top {
     position: fixed;
     right: 24px;
@@ -276,106 +167,8 @@ details[open] summary { margin-bottom: 8px; }
 #back-to-top:hover { background: var(--accent-hover); transform: translateY(-2px); }
 
 /* ============================================================
-   PR3: улучшения по мотивам практической работы (Flexbox)
+   БЛОК 2. Модули, лендинг, занятия
    ============================================================ */
-
-/* Шапка: заголовок слева, меню справа */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-}
-header h1 { margin: 0; font-size: 1.6rem; }
-
-nav ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-nav ul li { margin: 0; }
-
-.nav-link { transition: color 0.25s ease; }
-
-/* Акцентная линия у сайдбара */
-aside {
-    border-left: 4px solid var(--accent-color);
-}
-
-/* Карточки статей на главной */
-#page-home article {
-    background: var(--main-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 22px 26px;
-    margin: 18px 0;
-    box-shadow: 0 2px 8px var(--box-shadow);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-#page-home article:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px var(--box-shadow);
-}
-#page-home article h3 { margin: 0 0 10px; color: var(--accent-color); }
-#page-home article p { margin: 0 0 14px; }
-#page-home hr { display: none; }
-
-/* Адаптив: шапка перестраивается вертикально */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-        padding: 16px;
-        gap: 12px;
-    }
-    nav ul {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-}
-
-/* ============================================================
-   Динамические занятия: мета-строка, домашние задания, примеры
-   ============================================================ */
-.lesson-meta {
-    color: #7f8c8d;
-    font-size: 0.9em;
-    margin: -6px 0 4px;
-}
-.lesson-minutes::before { content: '⏱ '; }
-.lesson-module::before  { content: '📘 '; }
-
-.info-text.example ol {
-    margin: 8px 0 0 20px;
-    padding: 0;
-}
-.info-text.example li {
-    margin-bottom: 4px;
-}
-
-.homework-list li {
-    margin-bottom: 6px;
-}
-
-/* Карточки на главной — стили уже есть из прошлого патча,
-   но добавим отступ между ними после <hr> */
-#home-cards hr {
-    border: none;
-    border-top: 1px solid var(--border-color);
-    margin: 20px 0;
-}
-#home-cards article h3 {
-    margin-top: 0;
-}
-
-/* ============================================================
-   Модульная архитектура: карточки модулей, лендинг, сайдбар
-   ============================================================ */
-
-/* --- Сетка модулей на главной --- */
 #modules-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -393,213 +186,160 @@ aside {
     box-shadow: 0 2px 8px var(--box-shadow);
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
-.module-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px var(--box-shadow);
-    border-color: var(--accent-color);
-}
-.module-card.soon {
-    opacity: 0.65;
-}
-.module-card.soon:hover {
-    transform: none;
-    border-color: var(--border-color);
-}
-
-.module-icon {
-    font-size: 2.4rem;
-    line-height: 1;
-    flex-shrink: 0;
-}
+.module-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px var(--box-shadow); border-color: var(--accent-color); }
+.module-card.soon { opacity: 0.65; }
+.module-card.soon:hover { transform: none; border-color: var(--border-color); }
+.module-icon { font-size: 2.4rem; line-height: 1; flex-shrink: 0; }
 .module-body { flex: 1; min-width: 0; }
-.module-body h3 {
-    margin: 0 0 6px;
-    font-size: 1.15rem;
-    color: var(--text-color);
-    display: flex;
+.module-body h3 { margin: 0 0 6px; font-size: 1.15rem; color: var(--text-color); display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.module-subtitle { margin: 0 0 8px; color: #7f8c8d; font-size: 0.9em; }
+.module-meta { font-size: 0.85em; color: #7f8c8d; margin: 8px 0; }
+.module-badge { display: inline-block; font-size: 0.7em; font-weight: bold; padding: 2px 8px; border-radius: 10px; background: var(--accent-color); color: #fff; vertical-align: middle; }
+.module-badge.soon { background: #7f8c8d; }
+
+.module-landing h2 { margin-top: 15px; }
+.lessons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 15px; }
+.lesson-card { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 6px; padding: 16px; transition: transform 0.15s, border-color 0.15s; }
+.lesson-card:hover { border-color: var(--accent-color); transform: translateY(-1px); }
+.lesson-card h4 { margin: 0 0 6px; font-size: 1rem; color: var(--accent-color); }
+.lesson-subtitle { margin: 0 0 8px; color: #7f8c8d; font-size: 0.9em; }
+.lesson-meta-inline { font-size: 0.8em; color: #7f8c8d; margin: 6px 0; }
+
+.tag { display: inline-block; background: var(--quiz-bg); color: var(--text-color); font-size: 0.75em; padding: 1px 6px; border-radius: 8px; border: 1px solid var(--quiz-border); margin-right: 4px; }
+
+.lesson-meta { color: #7f8c8d; font-size: 0.9em; margin: -6px 0 4px; }
+.lesson-minutes::before { content: '⏱ '; }
+.lesson-module::before { content: '📘 '; }
+
+.progress-bar { width: 100%; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden; margin: 8px 0 12px; }
+.progress-bar-fill { height: 100%; background: var(--accent-color); border-radius: 4px; transition: width 0.3s ease; }
+
+.breadcrumbs { font-size: 0.85em; color: #7f8c8d; margin: 0 0 8px; }
+.breadcrumbs a { color: var(--accent-color); text-decoration: none; cursor: pointer; }
+.breadcrumbs a:hover { text-decoration: underline; }
+
+/* ============================================================
+   БЛОК 3. SVG-диаграммы в занятиях
+   ============================================================ */
+.lesson-figure { margin: 22px 0; padding: 20px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; text-align: center; }
+.lesson-figure svg { display: block; width: 100%; max-width: 720px; height: auto; margin: 0 auto; color: var(--text-color); font-family: sans-serif; }
+.lesson-figure figcaption { margin-top: 14px; font-size: 0.9em; color: #7f8c8d; font-style: italic; text-align: center; line-height: 1.5; padding: 0 12px; }
+
+/* ============================================================
+   БЛОК 4. Квизы и подсказки
+   ============================================================ */
+.quiz-question { margin-bottom: 8px; }
+.quiz-question p { margin: 6px 0; }
+.quiz-divider { border: none; border-top: 1px dashed var(--quiz-border); margin: 18px 0; }
+.quiz-hint { margin-top: 10px; background: var(--main-bg); border: 1px solid var(--quiz-border); border-radius: 4px; padding: 8px 12px; font-size: 0.9em; }
+.quiz-hint summary { cursor: pointer; font-weight: bold; user-select: none; color: var(--accent-color); }
+.quiz-hint p { margin: 8px 0 0; color: var(--text-color); }
+
+/* ============================================================
+   БЛОК 5. Тренажёр по гейтам
+   ============================================================ */
+.gate-option { display: inline-block; margin: 4px 6px 4px 0; font-family: monospace; font-size: 15px; padding: 8px 14px; }
+.gate-option:hover { background: var(--accent-color); color: #fff; }
+#gate-options { margin: 14px 0; }
+
+/* ============================================================
+   БЛОК 6. Навигация между занятиями и модулями
+   ============================================================ */
+.lesson-nav, .module-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+    margin: 40px 0 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
 }
-.module-subtitle {
-    margin: 0 0 8px;
-    color: #7f8c8d;
-    font-size: 0.9em;
+.lesson-nav button, .module-nav button {
+    padding: 12px 16px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.module-meta {
-    font-size: 0.85em;
-    color: #7f8c8d;
-    margin: 8px 0;
-}
-.module-badge {
-    display: inline-block;
-    font-size: 0.7em;
-    font-weight: bold;
-    padding: 2px 8px;
-    border-radius: 10px;
+.lesson-nav button:first-child, .module-nav button:nth-child(1) { justify-self: start; }
+.lesson-nav button:nth-child(2), .module-nav button:nth-child(2) { justify-self: center; }
+.lesson-nav button:last-child, .module-nav button:nth-child(3) { justify-self: end; }
+.lesson-position { text-align: center; color: #7f8c8d; font-size: 0.85em; margin: 0; }
+
+/* ============================================================
+   БЛОК 7. Мобильный сайдбар
+   ============================================================ */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
     background: var(--accent-color);
     color: #fff;
-    vertical-align: middle;
-}
-.module-badge.soon {
-    background: #7f8c8d;
-}
-
-.btn-disabled {
-    background: #bdc3c7 !important;
-    cursor: not-allowed;
-    opacity: 0.8;
-}
-
-/* --- Лендинг модуля --- */
-.module-landing h2 { margin-top: 15px; }
-.lessons-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    margin-top: 15px;
-}
-
-.lesson-card {
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 16px;
-    transition: transform 0.15s, border-color 0.15s;
-}
-.lesson-card:hover {
-    border-color: var(--accent-color);
-    transform: translateY(-1px);
-}
-.lesson-card h4 {
-    margin: 0 0 6px;
-    font-size: 1rem;
-    color: var(--accent-color);
-}
-.lesson-subtitle {
-    margin: 0 0 8px;
-    color: #7f8c8d;
-    font-size: 0.9em;
-}
-.lesson-meta-inline {
-    font-size: 0.8em;
-    color: #7f8c8d;
-    margin: 6px 0;
-}
-.tag {
-    display: inline-block;
-    background: var(--quiz-bg);
-    color: var(--text-color);
-    font-size: 0.75em;
-    padding: 1px 6px;
-    border-radius: 8px;
-    border: 1px solid var(--quiz-border);
-    margin-right: 4px;
-}
-
-/* --- Активная кнопка в сайдбаре --- */
-.aside-btn.active {
-    border-color: var(--accent-color);
-    background: var(--quiz-bg);
+    border: none;
+    font-size: 22px;
     font-weight: bold;
+    cursor: pointer;
+    z-index: 250;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    transition: transform 0.15s;
 }
-.aside-btn.soon {
-    opacity: 0.5;
-    cursor: not-allowed;
+.sidebar-toggle:hover { background: var(--accent-hover); }
+.sidebar-toggle:active { transform: scale(0.92); }
+
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 199; backdrop-filter: blur(2px); }
+.sidebar-overlay.open { display: block; }
+
+/* ============================================================
+   БЛОК 8. Фокус и адаптив
+   ============================================================ */
+input:focus-visible, button:focus-visible, a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
-/* --- Прогресс-бар --- */
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: var(--border-color);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 8px 0 12px;
-}
-.progress-bar-fill {
-    height: 100%;
-    background: var(--accent-color);
-    border-radius: 4px;
-    transition: width 0.3s ease;
-}
+@media (max-width: 768px) {
+    body { padding: 12px; }
+    .sidebar-toggle { display: flex; }
+    wrapper { flex-direction: column; }
 
-/* --- Адаптив для модулей --- */
-@media (max-width: 600px) {
-    .module-card { flex-direction: column; }
-    .module-icon { font-size: 2rem; }
+    aside {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 88%;
+        max-width: 340px;
+        height: 100vh;
+        overflow-y: auto;
+        background: var(--main-bg);
+        z-index: 200;
+        transform: translateX(100%);
+        transition: transform 0.28s ease;
+        box-shadow: -6px 0 24px rgba(0,0,0,0.3);
+        border-left: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 60px 20px 20px;
+    }
+    aside.open { transform: translateX(0); }
+
+    main { flex: none; width: 100%; padding: 20px 16px; }
+
+    header { padding: 16px 18px; padding-right: 70px; }
+    header h1 { font-size: 1.4rem; margin-bottom: 8px; }
+    nav ul li { display: block; margin: 6px 0; }
+
+    .lesson-nav, .module-nav { grid-template-columns: 1fr; gap: 8px; }
+    .lesson-nav button, .module-nav button { width: 100%; justify-self: stretch !important; }
+
+    .lesson-figure { padding: 12px; }
+    .lesson-figure svg { max-width: 100%; }
+
     #modules-grid { grid-template-columns: 1fr; }
     .lessons-grid { grid-template-columns: 1fr; }
-}
-
-/* ============================================================
-   SVG-диаграммы в занятиях
-   ============================================================ */
-
-.lesson-figure {
-    margin: 22px 0;
-    padding: 20px;
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    text-align: center;
-}
-
-.lesson-figure svg {
-    display: block;
-    width: 100%;
-    max-width: 720px;
-    height: auto;
-    margin: 0 auto;
-    color: var(--text-color);
-    font-family: sans-serif;
-}
-
-.lesson-figure figcaption {
-    margin-top: 14px;
-    font-size: 0.9em;
-    color: #7f8c8d;
-    font-style: italic;
-    text-align: center;
-    line-height: 1.5;
-    padding: 0 12px;
-}
-
-@media (max-width: 600px) {
-    .lesson-figure { padding: 12px; }
-    .lesson-figure figcaption { font-size: 0.85em; padding: 0; }
-}
-
-/* ============================================================
-   Квизы с несколькими вопросами
-   ============================================================ */
-
-.quiz-question {
-    margin-bottom: 8px;
-}
-.quiz-question p {
-    margin: 6px 0;
-}
-.quiz-divider {
-    border: none;
-    border-top: 1px dashed var(--quiz-border);
-    margin: 18px 0;
-}
-.quiz-hint {
-    margin-top: 10px;
-    background: var(--main-bg);
-    border: 1px solid var(--quiz-border);
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 0.9em;
-}
-.quiz-hint summary {
-    cursor: pointer;
-    font-weight: bold;
-    user-select: none;
-    color: var(--accent-color);
-}
-.quiz-hint p {
-    margin: 8px 0 0;
-    color: var(--text-color);
 }

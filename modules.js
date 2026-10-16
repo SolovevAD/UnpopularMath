@@ -1,7 +1,6 @@
 /* ============================================================
-   MODULES.JS — реестр модулей платформы «Мир чисел»
-   Каждый модуль — самостоятельный учебный курс.
-   Поле status: 'available' | 'soon' | 'draft'
+   MODULES.JS — реестр модулей (без данных занятий — они
+   подгружаются лениво из отдельных файлов).
    ============================================================ */
 
 const MODULES = [
@@ -12,32 +11,27 @@ const MODULES = [
         subtitle: '17 занятий: от позиционных систем до IEEE 754',
         description: 'Полный семестровый курс по системам счисления: теория, машинное представление, арифметика, экзотические системы и практические применения.',
         status: 'available',
-        lessons: COURSE,
+        courseFile: 'course.js',
+        courseVar: 'COURSE',
+        lessonCount: 17,
         hasTools: true,
         toolsTitle: 'Калькуляторы и тренажёр',
-        meta: {
-            hours: 34,
-            weeks: 17,
-            level: 'базовый'
-        }
+        meta: { hours: 34, weeks: 17, level: 'базовый' }
     },
-
     {
         id: 'quantum-computer',
         icon: '⚛️',
         title: 'Квантовый компьютер',
-        subtitle: 'Интенсив: геометрия квантовых вычислений за 8 занятий',
-        description: 'Честная физика и геометрия без квантовой магии: кубиты как стрелки, суперпозиция, интерференция, алгоритм Гровера, алгоритм Шора, декогеренция.',
+        subtitle: 'Интенсив: геометрия квантовых вычислений за 9 занятий',
+        description: 'Честная физика и геометрия без квантовой магии: кубиты как стрелки, суперпозиция, интерференция, алгоритмы Гровера и Шора, квантовые ошибки, гейты и тренажёр.',
         status: 'available',
-        lessons: COURSE_QUANTUM,
-        hasTools: false,
-        meta: {
-            hours: 8,
-            weeks: 2,
-            level: 'средний'
-        }
+        courseFile: 'course-quantum.js',
+        courseVar: 'COURSE_QUANTUM',
+        lessonCount: 9,
+        hasTools: true,
+        toolsTitle: 'Тренажёр по квантовым гейтам',
+        meta: { hours: 10, weeks: 2, level: 'средний' }
     },
-
     {
         id: 'finite-automata',
         icon: '⚙️',
@@ -47,7 +41,6 @@ const MODULES = [
         status: 'soon',
         meta: { hours: 24, weeks: 12, level: 'средний' }
     },
-
     {
         id: 'graphs',
         icon: '🕸️',
@@ -57,7 +50,6 @@ const MODULES = [
         status: 'soon',
         meta: { hours: 28, weeks: 14, level: 'средний' }
     },
-
     {
         id: 'boolean-algebra',
         icon: '⊕',
@@ -67,7 +59,6 @@ const MODULES = [
         status: 'soon',
         meta: { hours: 22, weeks: 11, level: 'базовый' }
     },
-
     {
         id: 'combinatorics',
         icon: '🎲',
@@ -77,7 +68,6 @@ const MODULES = [
         status: 'soon',
         meta: { hours: 20, weeks: 10, level: 'базовый' }
     },
-
     {
         id: 'coding-theory',
         icon: '📡',
