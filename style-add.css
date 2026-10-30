@@ -1,0 +1,181 @@
+/* ============================================================
+   Стили для Google Auth и панели модератора
+   (добавить в конец style.css)
+   ============================================================ */
+
+/* --- Кнопка пользователя в шапке --- */
+header nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+#auth-container {
+    margin-left: auto;
+}
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px 4px 4px;
+    border-radius: 20px;
+    color: #fff;
+}
+.user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.user-name {
+    font-size: 13px;
+    font-weight: bold;
+}
+.btn-logout {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+}
+.btn-logout:hover { color: #e74c3c; }
+
+/* --- Реакции --- */
+.reactions-box, .module-reactions, .comments-block {
+    background: var(--main-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 30px;
+}
+.reactions-box h4, .module-reactions h4, .comments-block h4 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+}
+.reactions-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.reaction-btn {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.reaction-btn span { font-size: 14px; font-weight: bold; }
+.reaction-btn:hover { border-color: var(--accent-color); }
+.reaction-btn.active.like { background: #e8f8f5; border-color: #27ae60; color: #27ae60; }
+.reaction-btn.active.dislike { background: #fdedec; border-color: #c0392b; color: #c0392b; }
+.reaction-stat { font-weight: bold; font-size: 15px; margin-right: 10px; }
+
+.draft-mark {
+    background: #e74c3c;
+    color: #fff;
+    font-size: 0.7em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+.comments-stub {
+    background: var(--bg-color);
+    padding: 15px;
+    border-radius: 6px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+.comments-stub p { margin: 0 0 8px; }
+.comments-stub .stub-note { font-size: 0.9em; margin: 0; }
+
+/* --- Панель модератора --- */
+.mod-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    max-height: 80vh;
+    background: #2c3e50;
+    color: #ecf0f1;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: 13px;
+}
+.mod-panel.collapsed .mod-body { display: none; }
+.mod-header {
+    background: #1a252f;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    border-bottom: 1px solid #34495e;
+}
+.mod-icon-btn {
+    background: none;
+    border: none;
+    color: #ecf0f1;
+    cursor: pointer;
+    padding: 0 5px;
+    font-size: 16px;
+}
+.mod-icon-btn:hover { color: #e74c3c; }
+.mod-body {
+    overflow-y: auto;
+    padding: 10px 15px;
+}
+.mod-hint {
+    font-size: 11px;
+    color: #bdc3c7;
+    margin-bottom: 10px;
+}
+.mod-row {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #34495e;
+}
+.mod-row:last-child { border-bottom: none; }
+.mod-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-bottom: 4px;
+}
+.mod-toggle.small {
+    font-size: 11px;
+    margin-left: 20px;
+    margin-bottom: 2px;
+}
+.mod-toggle input { cursor: pointer; }
+.mod-expand {
+    background: #34495e;
+    border: none;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    margin-top: 5px;
+    width: 100%;
+}
+.mod-expand:hover { background: #2980b9; }
+.mod-lessons {
+    margin-top: 5px;
+    padding: 5px;
+    background: #1a252f;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}

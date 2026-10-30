@@ -343,3 +343,41 @@ input:focus-visible, button:focus-visible, a:focus-visible, summary:focus-visibl
     #modules-grid { grid-template-columns: 1fr; }
     .lessons-grid { grid-template-columns: 1fr; }
 }
+
+/* Контейнер для иконки авторизации */
+.auth-icon-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Стилизация стандартной кнопки Google под иконку */
+#auth-container .g_id_signin {
+    /* Делаем кнопку квадратной и скруглённой */
+    border-radius: 50%;
+    overflow: hidden;
+    width: 40px !important;
+    height: 40px !important;
+    border: none !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+}
+
+#auth-container .g_id_signin:hover {
+    transform: scale(1.05);
+}
+
+/* Скрываем текст "Sign in with Google" внутри кнопки, оставляя только логотип */
+#auth-container .g_id_signin > div {
+    background: transparent !important;
+}
+
+#auth-container .g_id_signin span {
+    display: none !important; /* Прячем текст */
+}
+
+/* Центрируем логотип */
+#auth-container .g_id_signin svg {
+    margin: 0 auto;
+}

@@ -23,6 +23,8 @@
                 <li><button class="theme-toggle" onclick="toggleTheme()">Сменить тему</button></li>
             </ul>
         </nav>
+        <!-- Контейнер для кнопки "Войти через Google" -->
+        <div id="auth-container" class="auth-icon-container"></div>
     </header>
 
     <button id="sidebar-toggle" class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Открыть меню занятий">☰</button>
@@ -47,16 +49,11 @@
                     <li><strong>Алгебра логики</strong> — 10 занятий: от высказываний до синтеза схем.</li>
                     <li><strong>Теория графов</strong> — 10 занятий: обходы, кратчайшие пути, остовные деревья.</li>
                 </ul>
-                <h3>Что появится в будущем</h3>
-                <ul>
-                    <li>Конечные автоматы и регулярные языки.</li>
-                    <li>Комбинаторика и дискретная вероятность.</li>
-                    <li>Теория кодирования и помехоустойчивые коды.</li>
-                </ul>
                 <h3>Технологии</h3>
                 <p>Платформа построена на чистом HTML, CSS и JavaScript без внешних зависимостей. Данные курсов подгружаются лениво — только когда открывается соответствующий модуль.</p>
             </section>
 
+            <!-- Инструменты курса систем счисления -->
             <section id="page-tools-numeral-systems" class="page">
                 <h2>Инструменты курса</h2>
                 <p><button class="btn btn-secondary" onclick="switchPage('module-numeral-systems')">← К курсу систем счисления</button></p>
@@ -104,6 +101,7 @@
                 </section>
             </section>
 
+            <!-- Инструменты квантового модуля -->
             <section id="page-tools-quantum-computer" class="page">
                 <h2>Тренажёр по квантовым гейтам</h2>
                 <p><button class="btn btn-secondary" onclick="switchPage('module-quantum-computer')">← К модулю «Квантовый компьютер»</button></p>
@@ -134,6 +132,7 @@
                 </section>
             </section>
 
+            <!-- Инструменты логики -->
             <section id="page-tools-boolean-algebra" class="page">
                 <h2>Тренажёр по алгебре логики</h2>
                 <p><button class="btn btn-secondary" onclick="switchPage('module-boolean-algebra')">← К модулю «Алгебра логики»</button></p>
@@ -168,6 +167,7 @@
                 </section>
             </section>
 
+            <!-- Инструменты графов -->
             <section id="page-tools-graphs" class="page">
                 <h2>Тренажёр по теории графов</h2>
                 <p><button class="btn btn-secondary" onclick="switchPage('module-graphs')">← К модулю «Теория графов»</button></p>
@@ -220,6 +220,13 @@
         </section>
     </footer>
 
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <!-- Firebase (подключается как модуль) -->
+    <script type="module" src="db.js"></script>
+    
+    <!-- Обычные скрипты -->
     <script src="modules.js"></script>
     <script src="course-loader.js"></script>
     <script src="renderer.js"></script>
@@ -227,6 +234,8 @@
     <script src="quantum-gates-trainer.js"></script>
     <script src="logic-trainer.js"></script>
     <script src="graphs-trainer.js"></script>
+    <script src="auth.js"></script>
+    <script src="moderator.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
