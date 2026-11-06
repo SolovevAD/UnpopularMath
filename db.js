@@ -1,10 +1,6 @@
-/* ============================================================
-   DB.JS — инициализация Firebase и экспорт функций
-   ============================================================ */
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, collection, query, where, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, collection, query, where, getDocs, deleteDoc, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCFAZWzq2b62IMjJrkyGCvQ2N2z_rVTiy0",
@@ -20,14 +16,11 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Экспортируем в глобальную область (window), чтобы обычные скрипты (script.js, moderator.js) 
-// могли получить к ним доступ без перевода всего проекта на ES-модули.
-window.FB = {
-    db, auth, provider,
-    doc, getDoc, setDoc, updateDoc, increment, onSnapshot, collection, query, where, getDocs, deleteDoc,
-    signInWithPopup, onAuthStateChanged, signOut
+window.FB = { 
+    db, auth, provider, 
+    doc, getDoc, setDoc, updateDoc, increment, onSnapshot, collection, query, where, getDocs, deleteDoc, addDoc, serverTimestamp, 
+    signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut 
 };
 
-// Сигнализируем, что Firebase готов
 window.dispatchEvent(new Event('firebase-ready'));
 console.log('Firebase initialized successfully');
