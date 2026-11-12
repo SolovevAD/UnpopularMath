@@ -122,16 +122,25 @@
         </section>
     </footer>
 
-    <script type="module" src="db.js"></script>
-    <script src="modules.js"></script>
-    <script src="course-loader.js"></script>
-    <script src="renderer.js"></script>
-    <script src="quantum-diagrams.js"></script>
-    <script src="quantum-gates-trainer.js"></script>
-    <script src="logic-trainer.js"></script>
-    <script src="graphs-trainer.js"></script>
-    <script src="auth.js"></script>
-    <script src="moderator.js"></script>
-    <script src="script.js"></script>
+    <!-- 1. Firebase -->
+    <script type="module" src="js/db.js"></script>
+    
+    <!-- 2. Реестр модулей -->
+    <script src="js/modules.js"></script>
+    
+    <!-- 3. Загрузчик курсов (ОБЯЗАТЕЛЬНО ДО renderer и script) -->
+    <script src="courses/course-loader.js"></script>
+    
+    <!-- 4. Отрисовка и тренажеры -->
+    <script src="js/renderer.js"></script>
+    <script src="courses/quantum-diagrams.js"></script>
+    <script src="courses/quantum-gates-trainer.js"></script>
+    <script src="courses/logic-trainer.js"></script>
+    <script src="courses/graphs-trainer.js"></script>
+    
+    <!-- 5. Авторизация, модератор и главный роутер -->
+    <script src="js/auth.js"></script>
+    <script src="js/moderator.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
