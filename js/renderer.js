@@ -127,7 +127,6 @@ function renderModuleLanding(mod) {
         ${continueBtn}
         <h3>Занятия модуля (${lessons.length})</h3>
         <div class="lessons-grid">${lessonCards}</div>
-        
         ${(typeof renderModuleAggregate === 'function') ? renderModuleAggregate(mod.id) : ''}
         ${modNav}
         <div id="module-comments-container-${mod.id}"></div>
@@ -139,7 +138,6 @@ function renderModulesSidebar() {
     const visibleModules = MODULES.filter(m => typeof isVisibleModule !== 'function' || isVisibleModule(m.id));
     const publishedCount = visibleModules.filter(m => m.status === 'available').length;
 
-    // Асинхронно подгружаем количество пользователей
     setTimeout(async () => {
         const el = document.getElementById('platform-stats');
         if (!el || !window.FB) return;
@@ -180,92 +178,4 @@ function renderModuleSidebar(mod, currentLessonId) {
         <section class="progress-box"><h4>Прогресс:</h4><p>Пройдено: <strong>${done} из ${total}</strong></p>
         <div class="progress-bar"><div class="progress-bar-fill" style="width:${total>0?Math.round(done/total*100):0}%"></div></div>
         <button class="aside-btn reset" onclick="resetProgress()">Сбросить</button></section>`;
-}
-
-async function renderProfilePage(targetUid, isOwnProfile) {
-    const data = await getUserProfileData(targetUid);
-    const user = data.userObj;
-    
-    let completedCourses = 0;
-    MODULES.forEach(mod => {
-        if (mod.status === 'available' && mod.lessons) {
-            const allDone = mod.lessons.every(l => userProgress[l.id]);
-            if (allDone) completedCourses++;
-        }
-    });
-
-    let favoritesHtml = '<p style="color:#64748b;">Пока нет избранных курсов.</p>';
-    if (isOwnProfile && data.favorites && data.favorites.length > 0) {
-        favoritesHtml = '<div class="favorites-grid">';
-        data.favorites.forEach(modId => {
-            const mod = MODULES.find(m => m.id === modId);
-            if (mod) {
-                favoritesHtml += `
-                    <div class="favorite-card">
-                        <h4>${mod.icon} ${mod.title}</h4>
-                        <button class="btn btn-secondary" style="margin-top:10px; font-size:12px; padding: 5px 10px;" onclick="switchPage('module-${mod.id}')">Перейти</button>
-                    </div>
-                `;
-            }
-        });
-        favoritesHtml += '</div>';
-    }
-
-    let commentsHtml = '';
-    if (data.userComments.length > 0) {
-        commentsHtml = '<div class="profile-comments-list">';
-        data.userComments.forEach(c => {
-            const type = c.targetType === 'module' ? 'Отзыв на модуль' : 'Комментарий';
-            const status = c.status === 'approved' ? '✅ Одобрено' : (c.status === 'rejected' ? '❌ Отклонено' : '⏳ На модерации');
-            const link = c.targetType === 'module' ? `module-${c.targetId}` : `lesson-${c.targetId}`;
-            
-            commentsHtml += `
-                <div class="profile-comment-item" onclick="switchPage('${link}')">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <span style="font-weight:bold; color:var(--accent-color);">${type}</span>
-                        <span style="font-size:0.85em; color:#64748b;">${status}</span>
-                    </div>
-                    <div class="comment-text">${c.text}</div>
-                </div>
-            `;
-        });
-        commentsHtml += '</div>';
-    } else {
-        commentsHtml = '<p style="color:#64748b;">Пока нет отзывов или комментариев.</p>';
-    }
-
-    const defaultAvatar = 'https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg';
-    const emailHtml = isOwnProfile ? `<p style="color:#64748b;">${user.email || ''}</p>` : '';
-
-    return `
-        <div class="profile-header">
-            <img src="${user.picture || defaultAvatar}" alt="Avatar" class="profile-avatar" onerror="this.src='${defaultAvatar}'">
-            <div>
-                <h2 style="margin-bottom:5px;">${user.name || 'Пользователь'}</h2>
-                ${emailHtml}
-                <div class="profile-karma">🌟 Карма: ${data.karma}</div>
-            </div>
-        </div>
-        
-        <div class="profile-stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">${completedCourses}</div>
-                <div class="stat-label">Курсов пройдено</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${data.userComments.length}</div>
-                <div class="stat-label">Всего отзывов</div>
-            </div>
-        </div>
-
-        <div class="profile-section">
-            <h3>⭐ Избранные курсы</h3>
-            ${favoritesHtml}
-        </div>
-
-        <div class="profile-section">
-            <h3>📝 Отзывы и комментарии</h3>
-            ${commentsHtml}
-        </div>
-    `;
 }

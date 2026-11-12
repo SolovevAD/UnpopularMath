@@ -1,7 +1,3 @@
-/* ============================================================
-   COURSE-LOADER.JS — ленивая загрузка курсов (поддержка массива)
-   ============================================================ */
-
 const COURSE_LOAD_CACHE = {};
 
 function loadScriptOnce(src) {
@@ -31,15 +27,10 @@ function getModuleLessons(mod) {
 }
 
 async function ensureModuleLoaded(mod) {
-    if (!mod || (!mod.courseFile && !mod.courseFiles)) return false;
-    
+    if (!mod || !mod.courseFile) return false;
     if (getModuleLessons(mod).length > 0) return true;
-    
     try {
-        const filesToLoad = mod.courseFiles ? mod.courseFiles : [mod.courseFile];
-        for (let i = 0; i < filesToLoad.length; i++) {
-            await loadScriptOnce(filesToLoad[i]);
-        }
+        await loadScriptOnce(mod.courseFile);
         return getModuleLessons(mod).length > 0;
     } catch (e) {
         console.error(e);
@@ -56,7 +47,7 @@ async function findModuleByLesson(lessonId) {
     }
     for (let i = 0; i < MODULES.length; i++) {
         const mod = MODULES[i];
-        if (mod.status !== 'available' || (!mod.courseFile && !mod.courseFiles)) continue;
+        if (mod.status !== 'available' || !mod.courseFile) continue;
         await ensureModuleLoaded(mod);
         const lessons = getModuleLessons(mod);
         if (lessons.some(function (l) { return l.id === lessonId; })) return mod;

@@ -11,6 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
     buildHomeModules();
     updateSidebar();
     applyHash();
+
+    ['calc-number', 'calc-from', 'calc-to'].forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', runAdvCalc);
+    });
+    runAdvCalc();
+
+    const tr = document.getElementById('trainer-input');
+    if (tr) tr.addEventListener('keydown', function (e) { if (e.key === 'Enter') checkTrainer(); });
+
+    const up = document.getElementById('back-to-top');
+    if (up) window.addEventListener('scroll', function () { up.classList.toggle('visible', window.scrollY > 400); });
 });
 
 window.addEventListener('hashchange', applyHash);
@@ -94,27 +106,20 @@ async function showPage(pageId) {
         }
     }
 
-    // Обработка профилей
     if (pageId === 'profile' || pageId.indexOf('user-') === 0) {
         let targetUid = currentUser ? currentUser.uid : null;
         let isOwn = true;
-        
         if (pageId.indexOf('user-') === 0) {
             targetUid = pageId.slice(5);
             isOwn = currentUser && (targetUid === currentUser.uid);
         }
-        
-        if (!targetUid) {
-            window.location.hash = 'home';
-            return;
-        }
-
+        if (!targetUid) { window.location.hash = 'home'; return; }
         const target = document.getElementById('page-profile');
         if (target) {
             target.innerHTML = '<p>Загрузка профиля...</p>';
-            renderProfilePage(targetUid, isOwn).then(html => {
-                target.innerHTML = html;
-            });
+            if (typeof renderProfilePage === 'function') {
+                renderProfilePage(targetUid, isOwn).then(html => { target.innerHTML = html; });
+            }
         }
     }
 
